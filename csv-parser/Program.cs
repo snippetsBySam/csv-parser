@@ -20,7 +20,7 @@ if (arguments.Length == 3)
 else
 {
     data = System.IO.File.ReadAllText(@"input.csv");
-    option = 3;
+    option = 2;
 }
 
 var runner = new OptionsDisplay(data, option);

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace csv_parser
@@ -14,7 +15,8 @@ namespace csv_parser
         {
             List<Person> items = new List<Person>();
             var lines = GetLines(data);
-            lines.Skip(1).ToList().ForEach(line => items.Add(new Person(GetHeaders(line, delimiter) )));
+            Regex csvSplit = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
+            lines.Skip(1).ToList().ForEach(line => items.Add(new Person(csvSplit.Split(line))));
             return items;
         }
 
