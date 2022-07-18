@@ -14,10 +14,21 @@ namespace csv_parser
             return items;
         }
 
-        public virtual string[] GetHeaders(string header, string delimiter)
+        public virtual string[] GetHeaders(string headerLine, string delimiter)
         {
-            string[] test = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
-            return test;
+            var headers = headerLine.Split(delimiter)
+                .Select(header => header.Trim())
+                .Where(header =>
+                   !string.IsNullOrWhiteSpace(header) ||
+                   !string.IsNullOrEmpty(headerLine)).ToArray();
+            return headers;
+        }
+
+        public virtual IEnumerable<string> GetLines(string data)
+        {
+            char[] LineBreaks = { '\r', '\n' };
+            var lines = data.Split(LineBreaks).Where(line => !String.IsNullOrWhiteSpace(line));
+            return lines;
         }
     }
 }
