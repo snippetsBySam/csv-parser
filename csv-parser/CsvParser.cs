@@ -1,4 +1,5 @@
-﻿using System;
+﻿using csv_parser.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,12 @@ namespace csv_parser
 {
     public class CsvParser
     {
-        public virtual List<T> Parse<T>(string data, string delimiter)
+
+        public virtual List<Person> Parse(string data, string delimiter)
         {
-            List<T> items = new List<T>();
+            List<Person> items = new List<Person>();
+            var lines = GetLines(data);
+            lines.Skip(1).ToList().ForEach(line => items.Add(new Person(GetHeaders(line, delimiter) )));
             return items;
         }
 
