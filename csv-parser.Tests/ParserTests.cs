@@ -13,6 +13,7 @@ Ulysses,Mcwalters,""Mcmahan, Ben L"",505 Exeter Rd, Hawerby cum Beesby, Lincolns
     CsvParser solution = new CsvParser();
 
 
+
     [Test]
     public void HeaderExtractionTest()
     {
@@ -27,13 +28,20 @@ Ulysses,Mcwalters,""Mcmahan, Ben L"",505 Exeter Rd, Hawerby cum Beesby, Lincolns
     [Test]
     public void GetLinesShouldSkipWhiteSpaces()
     {
-        Assert.Pass();
+        GetLines("").Count().Should().Be(0);
+        GetLines(" ").Count().Should().Be(0);
+        GetLines("\r").Count().Should().Be(0);
+        GetLines("\n").Count().Should().Be(0);
+        GetLines("\r\n").Count().Should().Be(0);
     }
 
     [Test]
     public void GetLinesShouldSplitContent()
     {
-        Assert.Pass();
+        GetLines("a\rb").Count().Should().Be(2);
+        GetLines("a\nb").Count().Should().Be(2);
+        GetLines("a\r\nb").Count().Should().Be(2);
+        GetLines(TestData1).Count().Should().Be(5);
     }
 
     [Test]
