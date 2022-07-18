@@ -37,6 +37,10 @@ namespace csv_parser.Models
                 this.web = data[10];
             }
         }
+        public override string ToString()
+        {
+            return $"{first_name} {last_name} - {company_name}";
+        }
     }
 
     
